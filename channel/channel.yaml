@@ -1,0 +1,9 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: applications
+  namespace: application-samples
+spec:
+  type: GitHub
+  pathname: https://github.com/umangachapagain/applications.git
