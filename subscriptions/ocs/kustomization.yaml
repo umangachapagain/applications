@@ -1,0 +1,6 @@
+namespace: openshift-storage
+resources:
+- namespace.yaml
+- placementrule.yaml
+- subscription.yaml
+- application.yaml
