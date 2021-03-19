@@ -1,0 +1,64 @@
+apiVersion: v1                    
+kind: Namespace
+metadata:
+  name: rook-ceph                             
+---
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: rook-application
+  namespace: rook-ceph
+spec:
+  componentKinds:
+  - group: apps.open-cluster-management.io
+    kind: Subscription
+  descriptor: {}
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values: 
+          - rook-application
+---
+apiVersion: v1                      
+kind: Namespace
+metadata:
+  name: ggithubcom-umangachapagain-applications-ns
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Channel
+metadata:
+  name: ggithubcom-umangachapagain-applications
+  namespace: ggithubcom-umangachapagain-applications-ns
+spec:
+  type: Git
+  pathname: 'https://github.com/umangachapagain/applications'
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: Subscription
+metadata:
+  annotations:
+    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: rook
+  labels:
+    app: rook-application
+  name: rook-application-subscription-0
+  namespace: rook-ceph
+spec:
+  channel: ggithubcom-umangachapagain-applications-ns/ggithubcom-umangachapagain-applications
+  placement:
+    placementRef:
+      kind: PlacementRule
+      name: rook-application-placement-0
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  labels:
+    app: rook-application
+  name: rook-application-placement-0
+  namespace: rook-ceph
+spec:
+  clusterSelector:
+    matchLabels:
+      'local-cluster': 'true'
