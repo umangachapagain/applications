@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: umanga-busybox-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ibm-spectrum-fusion
+  resources:
+    requests:
+      storage: 1Gi

@@ -1,0 +1,15 @@
+---
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: umanga-busybox
+  labels:
+    app: umanga-busybox
+spec:
+  clusterConditions:
+    - type: ManagedClusterConditionAvailable
+      status: "True"
+  clusterSelector:
+    matchLabels:
+      name: rackae1
+  #clusterReplicas: 1  #Apply to how many matched clusters, default is ALL

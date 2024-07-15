@@ -1,0 +1,5 @@
+namespace: umanga-busybox
+resources:
+- namespace.yaml
+- deployment.yaml
+- pvc.yaml

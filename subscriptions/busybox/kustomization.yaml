@@ -1,0 +1,6 @@
+namespace: umanga-busybox
+resources:
+- namespace.yaml
+- placementrule.yaml
+- subscription.yaml
+- application.yaml
